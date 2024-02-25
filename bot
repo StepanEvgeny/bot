@@ -2,13 +2,31 @@ import discord
 from discord.ext import commands
 import random
 
-description
+description = 'bot'
 
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 
+def gen_pass(pass_length):
+    elements = "+-/*!&$#?=@<>"
+    password = ""
+    for i in range(pass_length):
+        password += random.choice(elements)
+    return password
+
 bot = commands.Bot(command_prefix='?', description=description, intents=intents)
+
+client = discord.Client(intents=intents)
+
+@client.event
+async def on_ready():
+    print(f'We have logged in as {client.user}')
+
+@client.command()
+async def monetka(ctx):
+    answer = random.choice(["Орел", "Решка"])
+    await ctx.send(f"Выпала: {answer}")
 
 @client.event
 async def on_ready():
